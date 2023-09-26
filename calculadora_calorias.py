@@ -162,17 +162,23 @@ if __name__ == '__main__':
     total_calorias = 0
     contador_comidas = 0
 
+    #Bievenida
     while True:
+        
         #Mostrar menu
         #Ejemplo: 1. Desayuno
+
         comida_principal = mostrar_menu_principal()
         print('\n')
-        
-        #Salir si el usuario elige 4 o un numero diferente de 1,2 o 3.
-        if ((comida_principal >= 4) or (comida_principal <1)):
-            print("Elegiste salir")
-            break
 
+        #Salir si el usuario elige 4 o un numero diferente de 1,2 o 3.
+        if (comida_principal == 4):
+                print("Elegiste salir")
+                break
+        while((comida_principal >= 4) or (comida_principal <1 )):
+                print("Debes de elegir, desayuno, comida o cena!!!")
+                comida_principal= mostrar_menu_principal()
+       
         #Mostrar comida (Desayuno, Comida, Cena)
         # Ejemplo: Elegiste Desayuno...
         print("*" * 50)
@@ -184,9 +190,15 @@ if __name__ == '__main__':
         print("*" * 50)
 
         #Mostrar opcion de acuerdo a comida (desayuno, comida, cena) y tipo (ligera, media, pesada)
-        # Ejemplo: Elegiste Ligera...  
+        # Ejemplo: Elegiste Ligera... 
+        # eleccion = mostrar_ligera_media_pesada()
         opcion_comida = mostrar_ligera_media_pesada()
         print("*" * 50)
+        while((opcion_comida >= 4) or (opcion_comida < 1)):
+            print("Debes de elegir, ligera, media o pesada!!!")
+            opcion_comida = mostrar_ligera_media_pesada()
+        
+        #Mostrar opcion de la comida que elegiste
         mostrar_opcion_ligera_media_pesada(opcion_comida)
     
         #Mostrar total de comidas
@@ -213,7 +225,7 @@ if __name__ == '__main__':
         print("*" * 50)
         print('\n')
     #Mostrar si eleecion es saludable o excede las calorias recomendadas
-    if total_calorias <= 1500:
+    if  total_calorias > 0 and  total_calorias <= 1500:
         print("Tu elección es saludable")
-    else:
+    elif total_calorias > 1500:
         print("Elección excede calorías recomendadas")
