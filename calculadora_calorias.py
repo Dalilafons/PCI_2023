@@ -1,3 +1,4 @@
+# Variables individuales para cada alimento.
 ensalada = 15
 sopa = 18
 pasta = 20
@@ -18,20 +19,27 @@ platano = 7
 cereales = 9
 yogur = 11
 
-ligero_desayuno = [manzana, pera, platano]
-medio_desayuno = [tostada , cereales , yogur]
-pesado_desayuno = [huevo , bacon , salchichas]
+# Listas anidadas para desayunos, comidas, y cenas.
+desayunos = [
+    [manzana, pera, platano],       # ligero
+    [tostada, cereales, yogur],    # medio
+    [huevo, bacon, salchichas]     # pesado
+]
 
-ligero_comida = [ensalada , sopa , pasta]
-medio_comida = [pollo , pescado , arroz]
-pesado_comida = [carne , patatas , legumbres]
+comidas = [
+    [ensalada, sopa, pasta],       # ligero
+    [pollo, pescado, arroz],       # medio
+    [carne, patatas, legumbres]    # pesado
+]
 
-ligero_cena = [sopa , verduras , pescado]
-medio_cena = [pollo , pescado ,arroz]
-pesado_cena = [carne , patatas ,legumbres]
+cenas = [
+    [sopa, verduras, pescado],     # ligero
+    [pollo, pescado, arroz],       # medio
+    [carne, patatas, legumbres]    # pesado
+]
 
 def mostrar_menu_principal():
-    print("Menú principal:\n1.Desayuno\n2.Comida\n3.Cena\n4.Salir")
+    print("Menu principal:\n1.Desayuno\n2.Comida\n3.Cena\n4.Salir")
     opcion = int(input("Elije una opción: "))
     return opcion
 
@@ -133,55 +141,14 @@ def calcular_calorias(tipo_comida, opcion_comida):
     """
     #Validar entrada
     if ((tipo_comida>=1) and (tipo_comida<=3)):
-        if tipo_comida == 1:  # Desayuno
-            if opcion_comida == 1: #Desayuno ligero
-                total_ligero = 0
-                for ligero in ligero_desayuno:
-                    total_ligero += ligero
-                return total_ligero
-            elif opcion_comida == 2:#Desayuno medio
-                total_medio = 0
-                for medio in medio_desayuno:
-                    total_medio += medio
-                return total_medio
-            else:#Desayuno pesado
-                total_pesado = 0
-                for pesado in pesado_desayuno:
-                    total_pesado += pesado
-                return total_pesado
-        elif tipo_comida == 2:  #Comida
-            if opcion_comida == 1: #Comida ligera
-                total_ligero = 0
-                for ligero in ligero_comida:
-                    total_ligero += ligero
-                return total_ligero
-            elif opcion_comida == 2:#Comida media
-                total_medio = 0
-                for medio in medio_comida:
-                    total_medio += medio
-                return total_medio
-            else:#Comida pesado
-                total_pesado = 0
-                for pesado in pesado_comida:
-                    total_pesado += pesado
-                return total_pesado
-            
-        elif tipo_comida == 3:  #Cena
-            if opcion_comida == 1: #Cena ligera
-                total_ligero = 0
-                for ligero in ligero_cena:
-                    total_ligero += ligero
-                return total_ligero
-            elif opcion_comida == 2:#Cena media
-                total_medio = 0
-                for medio in medio_cena:
-                    total_medio += medio
-                return total_medio
-            else:#Cena pesada
-                total_pesado = 0
-                for pesado in pesado_cena:
-                    total_pesado += pesado
-                return total_pesado
+        comidas_dict = {
+        1: desayunos,
+        2: comidas,
+        3: cenas
+        }
+        comidas_elegidas = comidas_dict[tipo_comida]
+        total = sum(comidas_elegidas[opcion_comida - 1])
+        return total
     else:
         print("Error, el valor que ingresaste no existe.")
 
